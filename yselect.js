@@ -9,13 +9,15 @@
  *
  *
  * - ySelect -
- * Version: v1.0.0
+ * Version: v1.0.1
  * Date: 12/01/2017
  * Git: https://github.com/trevonerd/ySelect
  * ---
  * Author: Marco Trevisani <marco.trevisani@ynap.com>
  * ---
  * Further changes, comments:
+ * --- v1.0.1:
+ * - fixed some errors!
  * --- v1.0.0:
  * - first release
  *
@@ -26,13 +28,13 @@
  *
  **** Initialisation Options:
  * $({containerId}).ySelect({fake-select-class-name}, {
- *    elements: {
- *        pageContainer: $("#mainContainer"),               - main page container element.
+ *    pageElements: {
+ *        mainContainer: $("#mainContainer"),               - main page container element.
  *        userBar: $("#userBar")                            - userbar container element.
  *    },
  *    subtitle: {
  *        enabled: true,                                    - enable select button subtitle.
- *        class: ".select-subtitle"                         - button subtitle class name.
+ *        className: ".select-subtitle"                     - button subtitle class name.
  *    },
  *    selectButton: "select-button",                        - select button css class name.
  *    selectOverlay: "select-overlay",                      - options container css class name.
@@ -47,13 +49,13 @@
 
     var pluginName = "ySelect",
         defaults = {
-            elements: {
-                pageContainer: $("#mainContainer"),
+            pageElements: {
+                mainContainer: $("#mainContainer"),
                 userBar: $("#userBar")
             },
             subtitle: {
                 enabled: true,
-                class: ".select-subtitle"
+                className: ".select-subtitle"
             },
             selectButton: "select-button",
             selectOverlay: "select-overlay",
@@ -64,7 +66,7 @@
         };
 
     var buildCache = function (settings) {
-        cache.userbarHeight = settings.element.userbar.outerHeight();
+        cache.userbarHeight = settings.pageElements.userBar.outerHeight();
     };
 
     function Plugin (element, selector, options) {
@@ -83,7 +85,7 @@
             self.container.on("click",
                 self.selectorClass + " ." + self.settings.selectButton,
                 function () {
-                    var mainContainerOffset = self.settings.elements.pageContainer.offset().top;
+                    var mainContainerOffset = self.settings.pageElements.mainContainer.offset().top;
                     var ySelectContainer = $(this).parent(self.selectorClass);
 
                     if (ySelectContainer.hasClass("open")) {
@@ -113,10 +115,11 @@
                 });
         },
         updateYSelect: function () {
-            if (this.settings.subtitle.enabled) {
-                this.selectorElm.each(function () {
+            var self = this;
+            if (self.settings.subtitle.enabled) {
+                self.selectorElm.each(function () {
                     var ySelect = $(this);
-                    ySelect.find(this.settings.subtitle.class).html(ySelect.attr("data-selected"));
+                    ySelect.find(self.settings.subtitle.className).html(ySelect.attr("data-selected"));
                 });
             }
         },
