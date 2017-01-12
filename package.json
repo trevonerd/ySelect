@@ -1,0 +1,19 @@
+{
+  "name": "yselect",
+  "version": "1.0.0",
+  "description": "yoox.com fake selects",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/trevonerd/ySelect.git"
+  },
+  "author": "Marco Trevisani <marco.trevisani@ynap.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/trevonerd/ySelect/issues"
+  },
+  "homepage": "https://github.com/trevonerd/ySelect#readme"
+}
